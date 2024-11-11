@@ -44,13 +44,17 @@ app.get('/protected', authMiddleware, (req, res) => {
 });
 
 app.get('/logout', (req, res) => {
-  //res.setHeader('WWW-Authenticate', `Basic realm="${realm}"`);
+  res.setHeader('WWW-Authenticate', `Basic realm="${realm}"`);
   res.status(401).send('Has sido deslogueado');
 });
 
 // Ruta sin protección para pruebas
 app.get('/', (req, res) => {
   res.sendFile(__dirname + '/public/index.html');
+});
+
+app.get('/mensajito', authMiddleware, (req, res) => {
+  res.send(`Holiiiiiiiiiii`);
 });
 
 // Iniciar el servidor
